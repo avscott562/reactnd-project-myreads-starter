@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import * as BooksAPI from '../BooksAPI'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
@@ -21,7 +22,7 @@ class Book extends Component {
               </select>
             </div>
           </div>
-          <div className="book-title">To Kill a Mockingbird</div>
+          <div className="book-title">Book Title</div>
           <div className="book-authors">Harper Lee</div>
         </div>
       </li>

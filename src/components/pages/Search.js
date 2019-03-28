@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
-class ListBooks extends Component {}
+class Search extends Component {
 
-export default ListBooks
+}
+
+export default Search
