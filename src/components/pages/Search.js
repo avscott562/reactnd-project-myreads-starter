@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-//import * as BooksAPI from '../../BooksAPI'
+import * as BooksAPI from '../../BooksAPI'
+import Book from '../Book'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
@@ -11,29 +12,54 @@ class Search extends Component {
   }
 
   state = {
-    query: ""
+    books: [],
+    query: "",
+    searchedBooks: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books })
+      console.log(books)
+    })
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
+    this.setState({ query: query}, this.searchBooks(query))
   }
 
   clearQuery = () => {
     this.setState({ query: '' })
   }
 
+  searchBooks(query) {
+    if(query === "") {
+      this.setState({ searchedBooks: []})
+    }
+
+    BooksAPI.search(query)
+    .then(search => {
+      this.setState({searchedBooks: search})
+    })
+  }
+
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+    .then((BooksAPI.getAll()
+    .then((books) => {
+      this.setState({books})
+    })))
+  }
+
+
 
   render() {
-    const { books } = this.props
-    const { query } = this.state
-
-    let showingBooks
-    if (query) {
-      const match = new RegExp(escapeRegExp(query), 'i')
-      showingBooks = books.filter((book) => match.test(book.id))
-    } else {
-      showingBooks = books
-    }
+    // if (this.state.query) {
+    //   const match = new RegExp(escapeRegExp(this.state.query), 'i')
+    //   showingBooks = books.filter((book) => match.test(book.id))
+    // } else {
+    //   showingBooks = books
+    // }
 
     //showingBooks.sort(sortBy('title'))
 
@@ -50,12 +76,19 @@ class Search extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text" placeholder="Search by title or author"/>
+            <input type="text" value={this.state.query}
+              placeholder="Search by title or author"
+              onChange={(e) => this.updateQuery(e.target.value)}
+            />
 
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            {this.state.searchedBooks.map((book, key, updateShelf) => (
+              <Book book={book} key={book.id} updateShelf={this.updateShelf}/>
+            ))}
+          </ol>
         </div>
       </div>
     )
