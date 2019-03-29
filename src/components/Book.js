@@ -1,19 +1,27 @@
 import React, {Component} from 'react'
+import * as BooksAPI from '.././BooksAPI'
 // import { Link } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 // import escapeRegExp from 'escape-string-regexp'
 // import sortBy from 'sort-by'
 
 class Book extends Component {
+  handleChange = e => {
+    const newShelf = e.target.value
+    this.props.book.shelf = newShelf;
+    // BooksAPI.update(this.props.book, newShelf)
+    {this.props.updateShelf(this.props.book, newShelf)}
+  }
   render() {
     const book = this.props.book
+
     return(
       <li>
         <div className="book">
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
             <div className="book-shelf-changer">
-              <select>
+              <select value={book.shelf} onChange={this.handleChange}>
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>

@@ -15,7 +15,16 @@ class Home extends Component {
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
+      console.log(books)
     })
+  }
+
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+    .then((BooksAPI.getAll()
+    .then((books) => {
+      this.setState({books})
+    })))
   }
 
   render() {
@@ -27,11 +36,11 @@ class Home extends Component {
         <div className="list-books-content">
           <div>
             <Shelf name="Currently Reading" books={this.state.books.filter(book =>
-            book.shelf === "currentlyReading")}/>
+            book.shelf === "currentlyReading")} updateShelf={this.updateShelf}/>
             <Shelf name="Want To Read" books={this.state.books.filter(book =>
-            book.shelf === "wantToRead")}/>
+            book.shelf === "wantToRead")} updateShelf={this.updateShelf}/>
             <Shelf name="Read" books={this.state.books.filter(book =>
-            book.shelf === "read")}/>
+            book.shelf === "read")} updateShelf={this.updateShelf}/>
           </div>
         </div>
         <div className="open-search">
