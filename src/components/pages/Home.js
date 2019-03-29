@@ -14,8 +14,7 @@ class Home extends Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-      console.log(books)
+      this.setState({ books })      
     })
   }
 
@@ -27,10 +26,12 @@ class Home extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf name="Currently Reading" books={this.state.books.filter(x =>
-            x.shelf === "currentlyReading")}/>
-            <Shelf name="Want To Read"/>
-            <Shelf name="Read"/>
+            <Shelf name="Currently Reading" books={this.state.books.filter(book =>
+            book.shelf === "currentlyReading")}/>
+            <Shelf name="Want To Read" books={this.state.books.filter(book =>
+            book.shelf === "wantToRead")}/>
+            <Shelf name="Read" books={this.state.books.filter(book =>
+            book.shelf === "read")}/>
           </div>
         </div>
         <div className="open-search">
