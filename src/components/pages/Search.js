@@ -40,6 +40,7 @@ class Search extends Component {
     BooksAPI.search(query)
     .then(search => {
       this.setState({searchedBooks: search})
+      console.log(search)
     })
   }
 
