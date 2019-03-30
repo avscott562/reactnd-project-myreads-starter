@@ -11,11 +11,11 @@ To get started developing right away:
 
 # dependencies
 
-This program is dependent upon React, boothstrap, npm, and node.js.
+This program is dependent upon React, npm, and node.js.
 
 ## How It Works
 
-The home page will disply all of the books you've already categorized and placed on the "Currently Reading", "Waiting to Read", or "Read" shelves.  Each book has a toggle menu that allows you to move the book from one shelf to another.
+The home page will display all of the books you've already categorized and placed on the "Currently Reading", "Waiting to Read", or "Read" shelves.  Each book has a toggle menu that allows you to move the book from one shelf to another.
 
 Clicking the 'Add Book' takes you to the search page where you are able to search the library of books.  You can then add these books to any of the 3 shelves if you choose.  Once you return to the Home page, you'll see the book(s) you've added.
 
@@ -36,8 +36,6 @@ The backend API uses a fixed set of cached search results and is limited to a pa
 
 
 ## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 This is a student version updated by Alicia Scott.
 
