@@ -16,7 +16,6 @@ class Search extends Component {
     searchedBooks: []
   }
 
-
   updateQuery = (query) => {
     this.setState({ query: query.trim() }, this.searchBooks(query))
   }
@@ -24,12 +23,16 @@ class Search extends Component {
   searchBooks(query) {
     if(query) {
       BooksAPI.search(query).then((books) => {
-        this.setState({ searchedBooks: books })
-        this.state.searchedBooks.sort(sortBy('title'))
+        return this.setState({ searchedBooks: books })
+      })
+      .catch((err) => {
+        console.log("no results found", err)
+        return <div>No Results Found</div>
       })
     } else {
-        this.setState({ searchedBooks: [] })
+        return this.setState({ searchedBooks: [] })
     }
+    this.state.searchedBooks.sort(sortBy('title'))
   }
 
   render() {
