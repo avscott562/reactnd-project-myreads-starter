@@ -8,18 +8,17 @@ import sortBy from 'sort-by'
 
 class Search extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    allBooks: PropTypes.array.isRequired
   }
 
   state = {
-    books: [],
     query: "",
     searchedBooks: []
   }
 
 
   updateQuery = (query) => {
-    this.setState({ query: query}, this.searchBooks(query))
+    this.setState({ query: query.trim() }, this.searchBooks(query))
   }
 
   clearQuery = () => {
@@ -27,27 +26,18 @@ class Search extends Component {
   }
 
   searchBooks(query) {
-    if(query === "") {
-      this.setState({ searchedBooks: []})
+    if (query) {
+      BooksAPI.search(query)
+      const match = new RegExp(escapeRegExp(query), 'i')
+      this.setState({ searchedBooks: this.props.allBooks.filter((book) => match.test(book.title || book.authors)) })
+    } else {
+      this.setState({ searchedBooks: this.props.allBooks })
     }
 
-    BooksAPI.search(query)
-    .then(search => {
-      this.setState({searchedBooks: search})
-      console.log(search)
-    })
+    this.state.searchedBooks.sort(sortBy('title'))
   }
 
   render() {
-    // if (this.state.query) {
-    //   const match = new RegExp(escapeRegExp(this.state.query), 'i')
-    //   showingBooks = books.filter((book) => match.test(book.id))
-    // } else {
-    //   showingBooks = books
-    // }
-
-    //showingBooks.sort(sortBy('title'))
-
     return (
       <div className="search-books">
         <div className="search-books-bar">

@@ -9,7 +9,6 @@ class Book extends Component {
   handleChange = e => {
     const newShelf = e.target.value
     this.props.book.shelf = newShelf;
-    // BooksAPI.update(this.props.book, newShelf)
     {this.props.updateShelf(this.props.book, newShelf)}
   }
   render() {
