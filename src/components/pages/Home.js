@@ -12,20 +12,6 @@ class Home extends Component {
     books: []
   }
 
-  // componentDidMount() {
-  //   BooksAPI.getAll().then((books) => {
-  //     this.setState({ books })
-  //   })
-  // }
-
-  updateShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf)
-    .then((BooksAPI.getAll()
-    .then((books) => {
-      this.setState({books})
-    })))
-  }
-
   render() {
     return (
       <div className="list-books">
@@ -35,11 +21,11 @@ class Home extends Component {
         <div className="list-books-content">
           <div>
             <Shelf name="Currently Reading" books={this.props.allBooks.filter(book =>
-            book.shelf === "currentlyReading")} updateShelf={this.updateShelf}/>
+            book.shelf === "currentlyReading")} updateShelf={this.props.updateShelf}/>
             <Shelf name="Want To Read" books={this.props.allBooks.filter(book =>
-            book.shelf === "wantToRead")} updateShelf={this.updateShelf}/>
+            book.shelf === "wantToRead")} updateShelf={this.props.updateShelf}/>
             <Shelf name="Read" books={this.props.allBooks.filter(book =>
-            book.shelf === "read")} updateShelf={this.updateShelf}/>
+            book.shelf === "read")} updateShelf={this.props.updateShelf}/>
           </div>
         </div>
         <div className="open-search">

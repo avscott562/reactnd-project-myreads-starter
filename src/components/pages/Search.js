@@ -38,16 +38,6 @@ class Search extends Component {
     })
   }
 
-  updateShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf)
-    .then((BooksAPI.getAll()
-    .then((books) => {
-      this.setState({books})
-    })))
-  }
-
-
-
   render() {
     // if (this.state.query) {
     //   const match = new RegExp(escapeRegExp(this.state.query), 'i')
@@ -81,7 +71,7 @@ class Search extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             {this.state.searchedBooks.map((book, key, updateShelf) => (
-              <Book book={book} key={book.id} updateShelf={this.updateShelf}/>
+              <Book book={book} key={book.id} updateShelf={this.props.updateShelf}/>
             ))}
           </ol>
         </div>
