@@ -26,15 +26,16 @@ class Search extends Component {
   }
 
   searchBooks(query) {
-    if (query) {
-      BooksAPI.search(query)
-      const match = new RegExp(escapeRegExp(query), 'i')
-      this.setState({ searchedBooks: this.props.allBooks.filter((book) => match.test(book.title || book.authors)) })
-    } else {
-      this.setState({ searchedBooks: this.props.allBooks })
-    }
+    if(query) {
+      BooksAPI.search(query).then((books) => {
+        if(books === []) {
+          this.setState({ searchedBooks: books })
+          this.state.searchedBooks.sort(sortBy('title'))
+        } else {
 
-    this.state.searchedBooks.sort(sortBy('title'))
+        }
+      })
+    }
   }
 
   render() {

@@ -25,8 +25,18 @@ class BooksApp extends Component {
   render() {
     return (
       <div>
-        <Home allBooks={this.state.allBooks} updateShelf={this.updateShelf}/>
-        <Search allBooks={this.state.allBooks} updateShelf={this.updateShelf}/>
+        <Route exact path="/" render={(() => (
+          <Home
+            allBooks={this.state.allBooks}
+            updateShelf={this.updateShelf}/>
+        ))}
+        />
+        <Route path="/search" render={(() => (
+          <Search
+            allBooks={this.state.allBooks}
+            updateShelf={this.updateShelf}/>
+        ))}
+        />
       </div>
     )
   }

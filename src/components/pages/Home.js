@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import * as BooksAPI from '../../BooksAPI'
 import Shelf from '../Shelf'
 import { Link } from 'react-router-dom'
 // import PropTypes from 'prop-types'
@@ -13,6 +12,8 @@ class Home extends Component {
   }
 
   render() {
+    const { allBooks, updateShelf } = this.props
+
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -20,16 +21,16 @@ class Home extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf name="Currently Reading" books={this.props.allBooks.filter(book =>
-            book.shelf === "currentlyReading")} updateShelf={this.props.updateShelf}/>
-            <Shelf name="Want To Read" books={this.props.allBooks.filter(book =>
-            book.shelf === "wantToRead")} updateShelf={this.props.updateShelf}/>
-            <Shelf name="Read" books={this.props.allBooks.filter(book =>
-            book.shelf === "read")} updateShelf={this.props.updateShelf}/>
+            <Shelf name="Currently Reading" books={allBooks.filter(book =>
+            book.shelf === "currentlyReading")} updateShelf={updateShelf}/>
+            <Shelf name="Want To Read" books={allBooks.filter(book =>
+            book.shelf === "wantToRead")} updateShelf={updateShelf}/>
+            <Shelf name="Read" books={allBooks.filter(book =>
+            book.shelf === "read")} updateShelf={updateShelf}/>
           </div>
         </div>
         <div className="open-search">
-          <Link to='/search'>Add a book</Link>
+          <Link to='/search' className="open-search-button">Add a book</Link>
         </div>
       </div>
     )
