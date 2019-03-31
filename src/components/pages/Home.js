@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
 import Shelf from '../Shelf'
 import { Link } from 'react-router-dom'
-// import PropTypes from 'prop-types'
-// import escapeRegExp from 'escape-string-regexp'
-// import sortBy from 'sort-by'
 
 
 class Home extends Component {

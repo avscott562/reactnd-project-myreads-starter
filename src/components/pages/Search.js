@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import * as BooksAPI from '../../BooksAPI'
+import DebounceInput from 'react-debounce-input'
 import Book from '../Book'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -28,13 +29,11 @@ class Search extends Component {
   searchBooks(query) {
     if(query) {
       BooksAPI.search(query).then((books) => {
-        if(books === []) {
-          this.setState({ searchedBooks: books })
-          this.state.searchedBooks.sort(sortBy('title'))
-        } else {
-
-        }
+        this.setState({ searchedBooks: books })
+        this.state.searchedBooks.sort(sortBy('title'))
       })
+    } else {
+        this.setState({ searchedBooks: [] })
     }
   }
 
@@ -52,7 +51,8 @@ class Search extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text" value={this.state.query}
+            <DebounceInput debounceTimeout={500}
+              type="text" value={this.state.query}
               placeholder="Search by title or author"
               onChange={(e) => this.updateQuery(e.target.value)}
             />
