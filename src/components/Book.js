@@ -1,13 +1,16 @@
 import React, {Component} from 'react'
-import * as BooksAPI from '.././BooksAPI'
 
 
 class Book extends Component {
+  componentDidMount() {
+    console.log(this)
+  }
+
   handleChange = e => {
     const newShelf = e.target.value
-    this.props.book.shelf = newShelf;
-    {this.props.updateShelf(this.props.book, newShelf)}
+    this.props.updateShelf(this.props.book, newShelf)
   }
+
   render() {
     const book = this.props.book
 

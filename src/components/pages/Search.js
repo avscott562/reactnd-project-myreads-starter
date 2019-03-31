@@ -4,7 +4,6 @@ import DebounceInput from 'react-debounce-input'
 import Book from '../Book'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
 class Search extends Component {
@@ -20,10 +19,6 @@ class Search extends Component {
 
   updateQuery = (query) => {
     this.setState({ query: query.trim() }, this.searchBooks(query))
-  }
-
-  clearQuery = () => {
-    this.setState({ query: '' })
   }
 
   searchBooks(query) {

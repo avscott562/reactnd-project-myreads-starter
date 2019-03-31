@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
 import Book from './Book'
 
-class Shelf extends Component {
-  componentDidMount() {
-    console.log(this)
-  }
+class Shelf extends Component {  
 
   render() {
     const currentBooks = this.props.books
