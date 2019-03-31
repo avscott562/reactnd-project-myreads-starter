@@ -23,14 +23,14 @@ class Search extends Component {
   searchBooks(query) {
     if(query) {
       BooksAPI.search(query).then((books) => {
-        return this.setState({ searchedBooks: books })
-      })
-      .catch((err) => {
-        console.log("no results found", err)
-        return <div>No Results Found</div>
-      })
+        if(books.error) {
+          this.setState({ searchedBooks: [] })
+        } else{
+            this.setState({ searchedBooks: books })
+        }
+      })      
     } else {
-        return this.setState({ searchedBooks: [] })
+        this.setState({ searchedBooks: [] })
     }
     this.state.searchedBooks.sort(sortBy('title'))
   }
