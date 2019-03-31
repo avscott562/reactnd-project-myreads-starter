@@ -17,12 +17,6 @@ class Search extends Component {
     searchedBooks: []
   }
 
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-      console.log(books)
-    })
-  }
 
   updateQuery = (query) => {
     this.setState({ query: query}, this.searchBooks(query))
